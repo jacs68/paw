@@ -13,26 +13,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Librer&iacute;a Atlantida</title>
     </head>
-    <sql:setDataSource var="libreria" driver="com.mysql.jdbc.Driver"                       
-                       url="jdbc:mysql://localhost:3306/libreria"
-                       user="root" password="mysql"/>
+    <sql:setDataSource var="libreria" driver="${initParam.driver}"                       
+                       url="${initParam.url}"
+                       user="${initParam.user}" password="${initParam.password}"/>
     <body>
         <h1>Selección de Libros</h1>
         <hr>
         Seleccione el libro de su preferencia
     <sql:query var="libros" dataSource="${libreria}">
-        SELECT LIB_TITULO,LIB_ISBN FROM libro
+        SELECT LIB_TITULO,LIB_ISBN,LIB_STOCK FROM libro
     </sql:query>
         <form action="ControlSeleccion" method="get">
             <select name="libro">
                 <option value="seleccion">Seleccione un libro</option>
                 <c:forEach var="libro" items="${libros.rows}">
-                    <option value="${libro.LIB_ISBN}"><c:out value="${libro.LIB_TITULO}"/></option>
+                    <option value="${libro.LIB_ISBN}"><c:out value="${libro.LIB_TITULO}"/> (<c:out value="${libro.LIB_STOCK}"/>)</option>
                 </c:forEach>
-                
-                
             </select>
-            Aca esta el driver:<c:out value="${applicationScope.driver}"/>
+            Cantidad: <input type="text" name="cantidad" size="3"/><br/>
+            <input type="submit" value="Enviar"/>            
         </form>
+            
     </body>
 </html>

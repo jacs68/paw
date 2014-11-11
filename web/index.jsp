@@ -13,8 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Librer&iacute;a Atlantida</title>
     </head>
+    
     <%--
-    <sql:setDataSource var="libreria" dataSource="${initParam.driver}"
+    <sql:setDataSource var="libreria" driver="${initParam.driver}"
                        url="${initParam.url}" user="${initParam.user}"
                        password="${initParam.password}"/>    
     --%>

@@ -19,6 +19,10 @@ public class Libro {
 
     public Libro() {
     }
+    
+    public Libro(String isbn){
+        this.isbn=isbn;
+    }
 
     public Libro(String titulo, String autor, String isbn, double precio, int stock) {
         this.titulo = titulo;

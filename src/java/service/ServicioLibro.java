@@ -33,4 +33,11 @@ public class ServicioLibro {
         cn.cerrarConexion();
         return libro;
     }
+    
+    public static void actualizarStock(String isbn,int cantidad) throws SQLException{
+       String query="UPDATE libro set LIB_CANT=LIB_CANTIDAD + "+cantidad
+               + " WHERE LIB_ISBN="+isbn; 
+       cn.actulizarDatos(query);
+       cn.cerrarConexion();       
+    }
 }

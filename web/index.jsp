@@ -36,7 +36,9 @@
             <select name="libro">
                 <option value="seleccion">Seleccione un libro</option>
                 <c:forEach var="libro" items="${libros.rows}">
-                    <option value="${libro.LIB_ISBN}"><c:out value="${libro.LIB_TITULO}"/> (<c:out value="${libro.LIB_STOCK}"/>)</option>
+                    <c:if test="${libro.LIB_STOCK>0}">
+                        <option value="${libro.LIB_ISBN}"><c:out value="${libro.LIB_TITULO}"/> (<c:out value="${libro.LIB_STOCK}"/>)</option>
+                    </c:if>
                 </c:forEach>
             </select>
             Cantidad: <input type="text" name="cantidad" size="3"/><br/>

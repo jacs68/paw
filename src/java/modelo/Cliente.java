@@ -10,7 +10,7 @@ package modelo;
  *
  * @author JACS
  */
-public class Cliente {
+public class Cliente extends Usuario{
     private String nombre;
     private String apPaterno;
     private String apMaterno;
@@ -19,7 +19,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(String nombre, String apMaterno, String dni) {
+    public Cliente(String usr,String psw,String nombre, String apMaterno, String dni) {
+        super(usr,psw);
         this.nombre = nombre;
         this.apMaterno = apMaterno;
         this.dni = dni;

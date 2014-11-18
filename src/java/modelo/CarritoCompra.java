@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import javax.naming.NamingException;
 import service.ServicioLibro;
 
 /**
@@ -21,6 +22,10 @@ public class CarritoCompra {
     private Cliente cliente;
     private Date fecha;
     private ArrayList<LibroComprado> libros;
+    
+    public CarritoCompra(){
+        
+    }
 
     public CarritoCompra(Cliente cliente, Date fecha) {
         this.cliente = cliente;
@@ -28,14 +33,14 @@ public class CarritoCompra {
         libros=new ArrayList<>();
     }
     
-    public boolean agregarLibro(String isbn,int cantidad) throws SQLException{
+    public boolean agregarLibro(String isbn,int cantidad) throws SQLException, NamingException{
         Libro libro=ServicioLibro.getLibro(isbn);
         LibroComprado lc=new LibroComprado(libro, cantidad);
         ServicioLibro.actualizarStock(isbn,cantidad*-1);
         return libros.add(lc);
     }
     
-    private void eliminarLibro(String isbn,int cantidad) throws SQLException{
+    private void eliminarLibro(String isbn,int cantidad) throws SQLException, NamingException{
         Libro l=new Libro(isbn);
         LibroComprado lc=new LibroComprado(l, cantidad);
         Collections.sort(libros, lc);
@@ -44,6 +49,11 @@ public class CarritoCompra {
             libros.remove(pos);
             ServicioLibro.actualizarStock(isbn, cantidad);
         }            
+    }
+    
+    public Libro getUltimoComprado(){
+        Libro l=libros.get(libros.size()-1).getLibro();
+        return l;
     }
         
     private class LibroComprado implements Comparator<LibroComprado>{

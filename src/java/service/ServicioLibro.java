@@ -36,7 +36,7 @@ public class ServicioLibro {
     }
     
     public static void actualizarStock(String isbn,int cantidad) throws SQLException, NamingException{
-       String query="UPDATE libro set LIB_CANT=LIB_CANTIDAD + "+cantidad
+       String query="UPDATE libro set LIB_STOCK=LIB_STOCK + "+cantidad
                + " WHERE LIB_ISBN='"+isbn+"'"; 
        cn.actulizarDatos(query);
        cn.cerrarConexion();       

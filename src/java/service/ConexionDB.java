@@ -30,7 +30,7 @@ public class ConexionDB {
     
     public ResultSet ejecutarQuery(String query) throws SQLException, NamingException{
         ctx=new InitialContext();
-        ds=(DataSource)ctx.lookup("java:comp/env/java/libreria");
+        ds=(DataSource)ctx.lookup("java:comp/env/jdbc/libreria");
         cn=ds.getConnection();
         st=cn.createStatement();
         rs=st.executeQuery(query);

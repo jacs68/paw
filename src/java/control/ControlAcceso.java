@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,14 +35,15 @@ public class ControlAcceso extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException,IOException{
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out=response.getWriter();
         HttpSession sesion=request.getSession(true);        
         Cliente cliente;
         String usr=request.getParameter("usr");
         String psw=request.getParameter("psw");
         try {
-            int id=ServicioUsuario.getUsuario(usr, psw);
+            int id=ServicioUsuario.getUsuario(usr, psw);            
             if(id!=0){
                 cliente=ServicioUsuario.getCliente(id);
                 sesion.setAttribute("usuario", cliente);
@@ -51,6 +53,10 @@ public class ControlAcceso extends HttpServlet {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ControlAcceso.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("error 1: "+ex);
+        } catch(NamingException ex){
+            Logger.getLogger(ControlAcceso.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("error 2: "+ex);
         }        
         
     }

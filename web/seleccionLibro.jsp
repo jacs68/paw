@@ -20,9 +20,9 @@
                        password="${initParam.password}"/>    
     --%>
 
-    <%--<c:if test="${session.usuario==null}">
+    <c:if test="${sessionScope.usuario==null}">
         <c:redirect url="index.html"/>
-    </c:if>--%>
+    </c:if>
     <body>
         <h1>Selección de Libros</h1>
         <hr>

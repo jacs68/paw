@@ -22,7 +22,7 @@ public class ServicioLibro {
     private static Libro libro;
     
     public static Libro getLibro(String isbn) throws SQLException, NamingException{        
-        String query="SELECT * FROM libro where LIB_ISBN="+isbn;
+        String query="SELECT * FROM libro where LIB_ISBN='"+isbn+"'";
         ResultSet rs=cn.ejecutarQuery(query);
         while(rs.next()){
             libro=new Libro(rs.getString("LIB_TITULO"),
@@ -36,8 +36,8 @@ public class ServicioLibro {
     }
     
     public static void actualizarStock(String isbn,int cantidad) throws SQLException, NamingException{
-       String query="UPDATE libro set LIB_CANT=LIB_CANTIDAD + "+cantidad
-               + " WHERE LIB_ISBN="+isbn; 
+       String query="UPDATE libro set LIB_STOCK=LIB_STOCK + "+cantidad
+               + " WHERE LIB_ISBN='"+isbn+"'"; 
        cn.actulizarDatos(query);
        cn.cerrarConexion();       
     }

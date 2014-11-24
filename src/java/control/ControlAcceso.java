@@ -37,26 +37,28 @@ public class ControlAcceso extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion=request.getSession(true);        
+        PrintWriter out = response.getWriter();
+        HttpSession sesion = request.getSession(true);
         Cliente cliente;
-        String usr=request.getParameter("usr");
-        String psw=request.getParameter("psw");
-        PrintWriter out=response.getWriter();
-        try{
-            int id=ServicioUsuario.getUsuario(usr, psw);
-            if(id!=0){
-                cliente=ServicioUsuario.getCliente(id);
-                sesion.setAttribute("usuario", cliente);                
+        String usr = request.getParameter("usr");
+        String psw = request.getParameter("psw");
+        try {
+            int id = ServicioUsuario.getUsuario(usr, psw);
+            if (id != 0) {
+                cliente = ServicioUsuario.getCliente(id);
+                sesion.setAttribute("usuario", cliente);
                 response.sendRedirect("seleccionLibro.jsp");
-            }else{
+            } else {
                 response.sendRedirect("index.html");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ControlAcceso.class.getName()).log(Level.SEVERE, null, ex);            
-        }catch(NamingException ex){
-            Logger.getLogger(ControlAcceso.class.getName()).log(Level.SEVERE, null, ex);            
-        }        
-        
+            Logger.getLogger(ControlAcceso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(ControlAcceso.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("error 2: " + ex);
+
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

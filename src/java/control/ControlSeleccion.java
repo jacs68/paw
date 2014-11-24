@@ -3,17 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.CarritoCompra;
+import modelo.Cliente;
+import modelo.Libro;
+import service.ServicioLibro;
 
 /**
  *
@@ -33,24 +41,29 @@ public class ControlSeleccion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion=request.getSession(true);
-        CarritoCompra carrito=(CarritoCompra)sesion.getAttribute("carrito");
-        if(carrito==null){
-                carrito=new CarritoCompra(null, null);
-                sesion.setAttribute("carrito", carrito);
-            }
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ControlSeleccion</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ControlSeleccion at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out=response.getWriter();
+        HttpSession sesion = request.getSession(true);        
+        Cliente clie=null;
+        String isbn=request.getParameter("libro");
+        int cantidad=Integer.parseInt(request.getParameter("cantidad"));
+        CarritoCompra carrito = (CarritoCompra) sesion.getAttribute("carrito");
+        if (carrito == null) {
+            clie=(Cliente)sesion.getAttribute("usuario");
+            carrito = new CarritoCompra(clie, new Date());
+            sesion.setAttribute("carrito", carrito);
         }
+        try {            
+            carrito.agregarLibro(isbn, cantidad);
+            response.sendRedirect("detalleLibro.jsp");            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("eeror 1: "+ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(ControlSeleccion.class.getName()).log(Level.SEVERE, null, ex);
+            out.println("eeror 1: "+ex);
+        }
+        
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -21,12 +21,13 @@ import javax.sql.DataSource;
  * @author JACS
  */
 public class ConexionDB {
-    //@Resource(name = "jdbc/libreria") No lo acepta el web container -- usar framework de injección 
+    //@Resource(name = "jdbc/libreria") -- No lo acepta el web container --
     private DataSource ds;
     private ResultSet rs;
     private Connection cn;
     private Statement st;
-    Context ctx;
+    private Context ctx;
+
     
     public ResultSet ejecutarQuery(String query) throws SQLException, NamingException{
         ctx=new InitialContext();

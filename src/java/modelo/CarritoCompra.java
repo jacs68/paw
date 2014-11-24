@@ -22,6 +22,10 @@ public class CarritoCompra {
     private Cliente cliente;
     private Date fecha;
     private ArrayList<LibroComprado> libros;
+    
+    public CarritoCompra(){
+        
+    }
 
     public CarritoCompra(Cliente cliente, Date fecha) {
         this.cliente = cliente;
@@ -45,6 +49,11 @@ public class CarritoCompra {
             libros.remove(pos);
             ServicioLibro.actualizarStock(isbn, cantidad);
         }            
+    }
+    
+    public Libro getUltimoComprado(){
+        Libro l=libros.get(libros.size()-1).getLibro();
+        return l;
     }
         
     private class LibroComprado implements Comparator<LibroComprado>{

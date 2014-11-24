@@ -8,6 +8,7 @@ package service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.naming.NamingException;
 import modelo.Cliente;
 import modelo.Usuario;
 
@@ -18,10 +19,9 @@ import modelo.Usuario;
 public class ServicioUsuario {
     private static ConexionDB cn=new ConexionDB();
     
-    public static int getUsuario(String usr,String psw) throws SQLException{
+    public static int getUsuario(String usr,String psw) throws SQLException, NamingException{
         int id=0;
-        String query="SELECT * from usuario WHERE USR_NOMBRE="+usr
-                +" AND USR_PSW="+psw;        
+        String query="SELECT * FROM usuario WHERE USR_NOMBRE='"+usr+"' AND USR_PASSWORD='"+psw+"'";        
         ResultSet rs=cn.ejecutarQuery(query);
         while(rs.next()){
             id=rs.getInt("USR_ID");
@@ -30,7 +30,7 @@ public class ServicioUsuario {
         return id;        
     }
     
-    public static Cliente getCliente(int id) throws SQLException{
+    public static Cliente getCliente(int id) throws SQLException, NamingException{
         Cliente c=null;
         String query="SELECT * FROM cliente WHERE USR_ID="+id;
         ResultSet rs=cn.ejecutarQuery(query);

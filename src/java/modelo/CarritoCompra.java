@@ -33,7 +33,7 @@ public class CarritoCompra {
     }
     
     public boolean agregarLibro(String isbn,int cantidad) throws SQLException, NamingException{
-        Libro libro=ServicioLibro.getLibro(isbn);
+        Libro libro=ServicioLibro.getLibro(isbn);        
         LibroComprado lc=new LibroComprado(libro, cantidad);
         ServicioLibro.actualizarStock(isbn,cantidad*-1);
         return libros.add(lc);

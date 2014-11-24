@@ -22,7 +22,7 @@ public class ServicioUsuario {
     public static int getUsuario(String usr,String psw) throws SQLException, NamingException{
         int id=0;
         String query="SELECT * from usuario WHERE USR_NOMBRE='"+usr+"'"
-                + " AND USR_PSW='"+psw+"'";        
+                + " AND USR_PASSWORD='"+psw+"'";        
         ResultSet rs=cn.ejecutarQuery(query);
         while(rs.next()){
             id=rs.getInt("USR_ID");

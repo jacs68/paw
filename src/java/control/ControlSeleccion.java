@@ -41,29 +41,32 @@ public class ControlSeleccion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out=response.getWriter();
-        HttpSession sesion = request.getSession(true);        
-        Cliente clie=null;
-        String isbn=request.getParameter("libro");
-        int cantidad=Integer.parseInt(request.getParameter("cantidad"));
+        PrintWriter out = response.getWriter();
+        HttpSession sesion = request.getSession(true);
+        Cliente clie = null;
+        String isbn = request.getParameter("libro");
+        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
         CarritoCompra carrito = (CarritoCompra) sesion.getAttribute("carrito");
         if (carrito == null) {
-            clie=(Cliente)sesion.getAttribute("usuario");
+            clie = (Cliente) sesion.getAttribute("usuario");
             carrito = new CarritoCompra(clie, new Date());
             sesion.setAttribute("carrito", carrito);
         }
-        try {            
-            carrito.agregarLibro(isbn, cantidad);
-            response.sendRedirect("detalleLibro.jsp");            
+        try {
+            if (isbn.compareTo("seleccion") == 0) {
+                response.sendRedirect("sinSeleccion.html");
+            } else {
+                carrito.agregarLibro(isbn, cantidad);
+                response.sendRedirect("detalleLibro.jsp");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControlSeleccion.class.getName()).log(Level.SEVERE, null, ex);
-            out.println("eeror 1: "+ex);
+            out.println("eeror 1: " + ex);
         } catch (NamingException ex) {
             Logger.getLogger(ControlSeleccion.class.getName()).log(Level.SEVERE, null, ex);
-            out.println("eeror 1: "+ex);
+            out.println("eeror 1: " + ex);
         }
-        
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

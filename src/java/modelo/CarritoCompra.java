@@ -9,7 +9,6 @@ package modelo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import javax.naming.NamingException;
 import service.ServicioLibro;
@@ -55,41 +54,8 @@ public class CarritoCompra {
         Libro l=libros.get(libros.size()-1).getLibro();
         return l;
     }
-        
-    private class LibroComprado implements Comparator<LibroComprado>{
-        Libro libro;
-        int cantidad;
-
-        public Libro getLibro() {
-            return libro;
-        }
-
-        public void setLibro(Libro libro) {
-            this.libro = libro;
-        }
-
-        public int getCantidad() {
-            return cantidad;
-        }
-
-        public void setCantidad(int cantidad) {
-            this.cantidad = cantidad;
-        }
-        
-        public LibroComprado(){
-            
-        }
-
-        public LibroComprado(Libro libro, int cantidad) {
-            this.libro = libro;
-            this.cantidad = cantidad;
-        }
-
-        @Override
-        public int compare(LibroComprado o1, LibroComprado o2) {
-            return o1.getLibro().getIsbn().compareTo(o2.getLibro().getIsbn());
-        }
-        
-        
-    }
+    
+    public ArrayList<LibroComprado> getLibros(){
+        return libros;
+    }    
 }

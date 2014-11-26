@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import javax.naming.NamingException;
+import service.ServicioCarrito;
 import service.ServicioLibro;
 
 /**
@@ -57,5 +58,12 @@ public class CarritoCompra {
     
     public ArrayList<LibroComprado> getLibros(){
         return libros;
-    }    
+    } 
+    
+    public void guardarCarrito() throws SQLException, NamingException{
+        int idCarrito;
+        idCarrito=ServicioCarrito.guardarCarrito(cliente.getDni());
+        
+        
+    }
 }

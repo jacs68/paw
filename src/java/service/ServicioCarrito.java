@@ -36,6 +36,6 @@ public class ServicioCarrito {
             idCarrito=rs.getInt("CARR_ID");            
         }
         cn.cerrarConexion();
-        return idCarrito        
+        return idCarrito;        
     }
 }

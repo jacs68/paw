@@ -13,6 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Detalle de Compra</title>
     </head>
+    <c:if test="${sessionScope.usuario==null}">
+        <c:redirect url="index.html"/>
+    </c:if>
     <jsp:useBean id="carrito" class="modelo.CarritoCompra" scope="session"/>
     <body>
         <h1>Detalle de Compra</h1>

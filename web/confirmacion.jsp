@@ -4,6 +4,7 @@
     Author     : Upao
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Confirmaci&oacute;n</title>
     </head>
+    <c:if test="${sessionScope.usuario==null}">
+        <c:redirect url="index.html"/>
+    </c:if>
     <body>
         <h1>Confirmaci&oacute;n de Compra</h1>
         Su orden fue procesada satisfactoriamente, Gracias por su preferencia<br/><br/>

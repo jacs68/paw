@@ -36,20 +36,25 @@ public class ControlCarrito extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out=response.getWriter();
-        HttpSession sesion=request.getSession(true);
-        CarritoCompra carrito=(CarritoCompra)sesion.getAttribute("carrito");
+        PrintWriter out = response.getWriter();
+        HttpSession sesion = request.getSession(true);
+        String isbn = request.getParameter("isbn");
+        CarritoCompra carrito = (CarritoCompra) sesion.getAttribute("carrito");
         try {
-            carrito.guardarCarrito();
-            System.out.println("Llego");
-            response.sendRedirect("confirmacion.jsp");
+            if (isbn == null || isbn.compareTo("") == 0) {
+                carrito.guardarCarrito();
+                System.out.println("Llego");
+                response.sendRedirect("confirmacion.jsp");
+            }else{
+                carrito.eliminarLibro(isbn);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ControlCarrito.class.getName()).log(Level.SEVERE, null, ex);
-            out.println("Error: "+ex);
+            out.println("Error: " + ex);
         } catch (NamingException ex) {
             Logger.getLogger(ControlCarrito.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

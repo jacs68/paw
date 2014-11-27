@@ -32,7 +32,8 @@
                     <tr>
                         <td><c:out value="${libro.libro.titulo}"/></td>
                         <td><c:out value="${libro.cantidad}"/></td>
-                        <td><fmt:formatNumber type="number"  pattern="#,###,00" value="${libro.libro.precio * libro.cantidad}"/></td>
+                        <td><fmt:formatNumber type="number"  pattern="#,###.00" value="${libro.libro.precio * libro.cantidad}"/></td>
+                        <td><a href="ControlCarrito?isbn=+${libro.libro.isbn}">Eliminar</a></td>
                     </tr>
                 </c:forEach>
 

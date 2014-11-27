@@ -69,4 +69,13 @@ public class CarritoCompra {
         
         
     }
+
+    public void eliminarLibro(String isbn) {
+        int posLibro;
+        Collections.sort(libros, new LibroComprado());
+        posLibro=Collections.binarySearch(libros, new LibroComprado(new Libro(isbn), 0), new LibroComprado());
+        if(posLibro>=0){
+            libros.remove(posLibro);
+        }
+    }
 }

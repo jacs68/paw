@@ -38,4 +38,18 @@ public class ServicioCarrito {
         cn.cerrarConexion();
         return idCarrito;        
     }
+
+    public static int guardarDetalle(int idCarrito, String isbn, int cantidad) throws SQLException, NamingException {
+        int idLibro=0;
+        int guardo=0;
+        String queryLibro="SELECT LIB_ID FROM libro WHERE LIB_ISBN='"+isbn+"'";
+        String queryDetalle="INSERT INTO detalle_carrito "
+                + "VALUES("+idCarrito+","+idLibro+","+cantidad+")";
+        rs=cn.ejecutarQuery(queryLibro);
+        while(rs.next()){
+            idLibro=rs.getInt("LIB_ID");
+        }
+        guardo=cn.actulizarDatos(queryDetalle);
+        return guardo;
+    }
 }

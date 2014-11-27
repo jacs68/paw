@@ -63,6 +63,9 @@ public class CarritoCompra {
     public void guardarCarrito() throws SQLException, NamingException{
         int idCarrito;
         idCarrito=ServicioCarrito.guardarCarrito(cliente.getDni());
+        for(LibroComprado lc:libros){
+            ServicioCarrito.guardarDetalle(idCarrito,lc.getLibro().getIsbn(),lc.getCantidad());
+        }
         
         
     }

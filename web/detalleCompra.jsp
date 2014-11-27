@@ -35,6 +35,8 @@
 
             </tbody>
         </table>
-
+        <form action="ControlCarrito" method="get">
+            <input type="submit" value="Confirmar Compra"/>
+        </form>
     </body>
 </html>

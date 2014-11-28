@@ -33,6 +33,10 @@
         <servlet-name>ControlAcceso</servlet-name>
         <servlet-class>control.ControlAcceso</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControlCarrito</servlet-name>
+        <servlet-class>control.ControlCarrito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControlSeleccion</servlet-name>
         <url-pattern>/ControlSeleccion</url-pattern>
@@ -40,6 +44,10 @@
     <servlet-mapping>
         <servlet-name>ControlAcceso</servlet-name>
         <url-pattern>/ControlAcceso</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControlCarrito</servlet-name>
+        <url-pattern>/ControlCarrito</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
